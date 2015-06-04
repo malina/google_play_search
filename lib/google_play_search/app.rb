@@ -49,7 +49,10 @@ module GooglePlaySearch
     end
 
     def get_category(google_play_html)
-      google_play_html.search("span[itemprop='genre']").first.content.strip
+      path = '/store/apps/category/'
+      category_url = google_play_html.search('a.document-subtitle.category')
+                     .first.attributes['href'].value
+      category_url[category_url.index(path) + path.size, category_url.size]
     end
   end
 end
